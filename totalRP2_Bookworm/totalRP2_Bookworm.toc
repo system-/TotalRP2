@@ -1,0 +1,12 @@
+﻿## Interface: 50400
+## Title: Total RP 2 module : Bookworm (beta)
+## Title-frFR: Total RP 2 module : Rat de bibliothèque (beta)
+## Title-esES: Total RP 2 module : Bookworm (beta)
+## Title-deDE: Total RP 2 module : Bookworm (beta)
+## Author: Ellypse
+## URL: http://trp2.forumotion.com
+## RequiredDeps: totalRP2
+## DefaultState: Enabled
+## LoadOnDemand: 0
+totalRP2_Bookworm.lua
+totalRP2_Bookworm.xml
