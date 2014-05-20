@@ -605,7 +605,7 @@ end
 function TRP2_SetFichePhysiqueSave()
 	TRP2_IncreaseVernNum("Physique");
 	local tab = TRP2_GetInfo(TRP2_Joueur,"Physique",{});
-	tab["PhysiqueTexte"] = TRP2_EmptyToNil(TRP2_FicheJoueurPhysiqueEditBox:GetText());
+	tab["PhysiqueTexte"] = string.gsub(TRP2_EmptyToNil(TRP2_FicheJoueurPhysiqueEditBox:GetText()),"[%#%~%µ%$%@]","");
 	TRP2_MSP_DescriUpdate(tab);
 	TRP2_SetInfo(TRP2_Joueur,"Physique",tab);
 end
@@ -625,7 +625,7 @@ end
 function TRP2_SetFicheHistoireSave()
 	TRP2_IncreaseVernNum("Histoire");
 	local tab = TRP2_GetInfo(TRP2_Joueur,"Histoire",{});
-	tab["HistoireTexte"] = TRP2_EmptyToNil(TRP2_FicheJoueurHistoireEditBox:GetText());
+	tab["HistoireTexte"] = string.gsub(TRP2_EmptyToNil(TRP2_FicheJoueurHistoireEditBox:GetText()),"[%#%~%µ%$%@]","");
 	TRP2_MSP_HistoryUpdate(tab);
 	TRP2_SetInfo(TRP2_Joueur,"Histoire",tab);
 end
@@ -1516,6 +1516,7 @@ function TRP2_DD_PotraitIconeClick(frame,level,menuList)
 	if not nom then
 		nom = TRP2_UnitNameWithRealm("target");
 	end
+	nom = TRP2_UnitNameWithRealm(nom);
 	if not nom then return end
 	level = level or 1;
 	UIDropDownMenu_SetWidth(frame, 20);
@@ -1644,19 +1645,15 @@ function TRP2_DD_PotraitIconeClick(frame,level,menuList)
 				end
 			end
 		end
-		if TRP2CHATNAME then
+    if TRP2CHATNAME then
 			
+		-----------------------------------------------
+		--  REPORTING OPTIONS
+		-----------------------------------------------
 			if level == 1 then
-
 			-- Create a sub menu for reporting
 			info = TRP2_CreateSimpleDDButton();
 			info.text = REPORT_PLAYER_FOR;
-			info.func = function() 
-				local dialog = StaticPopup_Show("CONFIRM_REPORT_SPAM_CHAT", nom);
-				if ( dialog ) then
-					dialog.data = nom;
-				end
-			end;
 			info.hasArrow = true;
 			UIDropDownMenu_AddButton(info,level);
 			
@@ -1666,10 +1663,10 @@ function TRP2_DD_PotraitIconeClick(frame,level,menuList)
 			info = TRP2_CreateSimpleDDButton();
 			info.text = REPORT_SPAMMING;
 			info.func = function() 
+			 SetPendingReportTarget(nom);
+			 ReportPlayer("spam","pending","");
 				local dialog = StaticPopup_Show("CONFIRM_REPORT_SPAM_CHAT", nom);
-				if ( dialog ) then
-					dialog.data = nom;
-				end
+				dialog.data = nom;
 			end;
 			UIDropDownMenu_AddButton(info,level);
 
@@ -1677,10 +1674,10 @@ function TRP2_DD_PotraitIconeClick(frame,level,menuList)
 			info = TRP2_CreateSimpleDDButton();
 			info.text = REPORT_BAD_LANGUAGE;
 			info.func = function() 
-				local dialog = StaticPopup_Show("CONFIRM_REPORT_BAD_LANGUAGE_CHAT", nom);
-        		if ( dialog ) then
-            		dialog.data = nom;
-        		end
+			 SetPendingReportTarget(nom);
+       ReportPlayer("spam","pending","");
+			local dialog = StaticPopup_Show("CONFIRM_REPORT_BAD_LANGUAGE_CHAT", nom);
+       		dialog.data = nom;
 			end;
 			UIDropDownMenu_AddButton(info,level);
 

@@ -207,7 +207,6 @@ function TRP2_CreaDocuChargerPage(Page)
 	end
 	-- Chargement du texte
 	TRP2_CreationFrameDocumentFramePageMainTexteScrollEditBox:SetScript("OnTextChanged",function(self)
-		self:SetText(string.gsub(self:GetText(),"[%#%~%µ%$%@]",""));
 		if TRP2_EmptyToNil(self:GetText()) ~= TRP2_EmptyToNil(TRP2_GetWithDefaut(TRP2_CreationFrameDocument.PageTab[Page],"Texte","")) then
 			
 		end
@@ -218,6 +217,7 @@ function TRP2_CreaDocuChargerPage(Page)
 	TRP2_CreationFrameDocumentFramePageMainTexteScrollEditBox:SetText(TRP2_GetWithDefaut(TRP2_CreationFrameDocument.PageTab[Page],"Texte",""));
 	-- Setting de l'enregistrement futur
 	TRP2_CreationFrameDocumentFramePageMainSave:SetScript("OnClick",function()
+	   TRP2_CreationFrameDocumentFramePageMainTexteScrollEditBox:SetText(string.gsub(TRP2_CreationFrameDocumentFramePageMainTexteScrollEditBox:GetText(),"[%#%~%µ%$%@]",""));
 		if TRP2_CreationFrameDocument.PageTab[Page] then
 			wipe(TRP2_CreationFrameDocument.PageTab[Page]);
 		else

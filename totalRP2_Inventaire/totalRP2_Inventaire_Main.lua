@@ -994,7 +994,7 @@ end
 -- tab[6] = Charges = 4
 -- tab[7] = Lifetime = 11
 function TRP2_ExchangeReceiveTab(tab,sender)
-	if TRP2_ExchangeSonTab and TRP2_ExchangeMonTab and TRP2_ExchangeMonTab["Cible"] == sender then
+	if TRP2_ExchangeSonTab and TRP2_ExchangeMonTab and TRP2_UnitNameWithRealm(TRP2_ExchangeMonTab["Cible"]) == TRP2_UnitNameWithRealm(sender) then
 		TRP2_ExchangeFrameSynchro:Hide();
 		TRP2_ExchangeFrameHelp:Hide();
 		TRP2_ExchangeSonTab["Ok"] = 0;

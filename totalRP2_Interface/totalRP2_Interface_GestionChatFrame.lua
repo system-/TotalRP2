@@ -174,6 +174,7 @@ function TRP2_Hooking_FrameEvent()
 					end
 					personnage = personnage.."{o}["..languePerso.."]{col}"..post;
 				end
+				-- TODO : Redirect to the ChatFrame corresponding the the /whisper sender if it is a /whisper
 				self:AddMessage(TRP2_CTS(personnage),info.r,info.g,info.b,info.id);
 				Affiche = 0;
 			else

@@ -71,6 +71,7 @@ function TRP2_UnitNameWithRealm(unit)
 	-- If the realm is not defined then the unit is from our realm so we define it ourself
 	if not realm or realm == "" then
 		realm = GetRealmName():gsub("%s+", "");
+		realm = realm:gsub("%-", "")
 	end
 
 	if name and realm then

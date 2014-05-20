@@ -83,7 +83,8 @@ function TRP2_SendContentToChannel(infoTab,prefix)
 end
 
 function TRP2_ReceiveMessageChannel(message,sender)
-	if sender == TRP2_Joueur or TRP2_EstIgnore(sender) or not TRP2_GetConfigValueFor("ActivateExchange",true) then
+  -- Check if the sender is the player, should not do anything then
+	if TRP2_SimplifyNameIfPlayer(sender) == TRP2_Joueur or TRP2_EstIgnore(sender) or not TRP2_GetConfigValueFor("ActivateExchange",true) then
 		return;
 	end
 	local messageTab = TRP2_fetchInformations(message);
@@ -102,10 +103,7 @@ function TRP2_ReceiveMessageChannel(message,sender)
 			TRP2_NewVersionDispo(tonumber(messageTab[3]));
 		end
 		if not TRP2_EstDansLeReg(sender) and TRP2_GetConfigValueFor("AutoNew",true) then
-			local nom, royaume = UnitName("target");
-			if royaume then
-				nom = nom.."-"..royaume;
-			end
+			local nom = TRP2_UnitNameWithRealm("target");
 			TRP2_AjouterAuRegistre(sender, nom == sender);
 		end
 	elseif messageTab[2] == "GetPlanque" then

@@ -1017,7 +1017,6 @@
 						<Size x="275" y="130"/>
 						<Scripts>
 							<OnTextChanged>
-								self:SetText(string.gsub(self:GetText(),"[%#%~%µ%$%@]",""));
 								if self:IsVisible() and self:GetCursorPosition() == string.len(self:GetText()) then
 									self:GetParent():SetVerticalScroll(self:GetParent():GetVerticalScrollRange());
 								end
@@ -1356,7 +1355,6 @@
 						<Size x="275" y="130"/>
 						<Scripts>
 							<OnTextChanged>
-								self:SetText(string.gsub(self:GetText(),"[%#%~%µ%$%@]",""));
 								if self:IsVisible() and self:GetCursorPosition() == string.len(self:GetText()) then
 									self:GetParent():SetVerticalScroll(self:GetParent():GetVerticalScrollRange());
 								end
